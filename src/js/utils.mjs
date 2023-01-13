@@ -18,7 +18,6 @@ export function setLocalStorage(key, data) {
     return itemData === null ? []
     : JSON.parse(itemData);
   })();
-  console.log("cartItems", cartItems);
   cartItems.push(data);
 
   localStorage.setItem(key, JSON.stringify(cartItems));
