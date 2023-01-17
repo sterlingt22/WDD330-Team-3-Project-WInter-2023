@@ -9,8 +9,11 @@ function renderCartContents() {
     const htmlItems = cartItems.map((item) => cartItemTemplate(item));
     document.querySelector(".product-list").innerHTML = htmlItems.join("");
 
+    // get the sum of cart products
     renderCartTotal();
+
 } else {
+  // if cart is empty, display message
   document.getElementById("cart-footer").classList.remove("hide");
   document.getElementById("cart-footer").innerHTML = "Your cart is empty.<br>Shop <a href='/index.html'>here</a>.";
 }
@@ -35,6 +38,7 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
+// adds commas to numbers as appropriate source: https://stackoverflow.com/questions/2901102/how-to-format-a-number-with-commas-as-thousands-separators
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
@@ -44,13 +48,15 @@ function renderCartTotal() {
   const cartItems = getLocalStorage("so-cart");
 
   document.getElementById("cart-footer").classList.remove("hide");
-  let cartTotal = 0;
 
+  // add the total price
+  let cartTotal = 0;
   for (let i = 0; i < cartItems.length; i++) {
     cartTotal += cartItems[i]['FinalPrice'];
   }
   cartTotal = numberWithCommas(cartTotal);
 
+  // append price to div
   const cartTotalContent = document.createTextNode(cartTotal);
   document.getElementById("cart-footer").appendChild(cartTotalContent);
 }
