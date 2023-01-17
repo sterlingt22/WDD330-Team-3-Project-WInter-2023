@@ -51,6 +51,7 @@ function renderCartTotal() {
 
   // add the total price
   let cartTotal = 0;
+  // calcuates number of items in cart
   let numberInCart = 0;
   for (let i = 0; i < cartItems.length; i++) {
     cartTotal += cartItems[i]['FinalPrice'];
