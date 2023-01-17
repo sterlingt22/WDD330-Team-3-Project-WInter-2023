@@ -3,10 +3,17 @@ import { getLocalStorage } from "./utils.mjs";
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
 
-  console.log(cartItems);
+  // only create a product list and total if cart isn't empty
+  if (cartItems !== null) {
+  
+    const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+    document.querySelector(".product-list").innerHTML = htmlItems.join("");
 
-  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+    renderCartTotal();
+} else {
+  document.getElementById("cart-footer").classList.remove("hide");
+  document.getElementById("cart-footer").innerHTML = "Your cart is empty.<br>Shop <a href='/index.html'>here</a>.";
+}
 }
 
 function cartItemTemplate(item) {
@@ -49,4 +56,3 @@ function renderCartTotal() {
 }
 
 renderCartContents();
-renderCartTotal();
