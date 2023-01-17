@@ -12,7 +12,8 @@ export function getLocalStorage(key) {
 // save data to local storage
 export function setLocalStorage(key, data) {
 
-  // 
+  // check if there is anything in local storage. If not,
+  // create an empty array and add item. Otherwise, parse and add
   const cartItems = (() => {
     const itemData = localStorage.getItem(key);
     return itemData === null ? []
