@@ -31,7 +31,7 @@ function cartItemTemplate(item) {
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: 1</p>
+  <p class="cart-card__quantity">qty: ${item.Quantity}</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
 </li>`;
 
@@ -54,10 +54,10 @@ function renderCartTotal() {
   // calcuates number of items in cart
   let numberInCart = 0;
   for (let i = 0; i < cartItems.length; i++) {
-    cartTotal += cartItems[i]['FinalPrice'];
-    numberInCart += 1;
+    cartTotal += cartItems[i]['Quantity'] * cartItems[i]['FinalPrice'];
+    numberInCart += cartItems[i]['Quantity'];
   }
-  cartTotal = numberWithCommas(cartTotal);
+  cartTotal = numberWithCommas(cartTotal.toFixed(2));
   console.log('Total number:', numberInCart);
 
   // append price to div

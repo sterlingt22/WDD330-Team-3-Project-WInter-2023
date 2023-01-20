@@ -19,10 +19,20 @@ export function setLocalStorage(key, data) {
     return itemData === null ? []
     : JSON.parse(itemData);
   })();
-  cartItems.push(data);
 
-  // save data to local storage
-  localStorage.setItem(key, JSON.stringify(cartItems));
+  // check if item is already in cart
+  if (cartItems.some(e => e.Id === data.Id)) {
+    // if it is in cart, increase quantity by 1
+    data = cartItems.find(e => e.Id === data.Id);
+    data.Quantity += 1;
+  } else {
+    // if its not already in cart, give it quantity 1 and add to cart
+    data.Quantity = 1;
+    cartItems.push(data);
+  }
+
+  // save to local storage
+    localStorage.setItem(key, JSON.stringify(cartItems));
 }
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
