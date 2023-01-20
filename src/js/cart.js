@@ -54,10 +54,10 @@ function renderCartTotal() {
   // calcuates number of items in cart
   let numberInCart = 0;
   for (let i = 0; i < cartItems.length; i++) {
-    cartTotal += cartItems[i]['FinalPrice'];
-    numberInCart += 1;
+    cartTotal += cartItems[i]['Quantity'] * cartItems[i]['FinalPrice'];
+    numberInCart += cartItems[i]['Quantity'];
   }
-  cartTotal = numberWithCommas(cartTotal);
+  cartTotal = numberWithCommas(cartTotal.toFixed(2));
   console.log('Total number:', numberInCart);
 
   // append price to div
